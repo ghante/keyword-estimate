@@ -33,7 +33,7 @@ public class AutoCompleteClientTest {
                 "galaxy s9 tempered glass screen protector",
                 "galaxy s9 case otter box");
 
-        List<String> keywords = autoCompleteClient.list("galaxy s9");
+        List<String> keywords = autoCompleteClient.search("galaxy s9");
 
         assertThat(keywords, is(expectedKeywords));
     }

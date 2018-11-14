@@ -72,7 +72,7 @@ public class EstimateServiceTest {
     }
 
     private void setUpSearchList() throws IOException {
-        when(autoCompleteClient.list("s")).thenReturn(
+        when(autoCompleteClient.search("s")).thenReturn(
                 Arrays.asList("sd card",
                         "space heater",
                         "shower curtain liner mildew resistant",
@@ -84,7 +84,7 @@ public class EstimateServiceTest {
                         "sonicare brush heads",
                         "spray bottle")
         );
-        when(autoCompleteClient.list("sa")).thenReturn(
+        when(autoCompleteClient.search("sa")).thenReturn(
                 Arrays.asList("samsung galaxy s8 charger",
                         "samsung galaxy s8 case",
                         "samsung galaxy s9 case",
@@ -96,7 +96,7 @@ public class EstimateServiceTest {
                         "satin pillowcase",
                         "salad spinner")
         );
-        when(autoCompleteClient.list("sam")).thenReturn(
+        when(autoCompleteClient.search("sam")).thenReturn(
                 Arrays.asList("samsung galaxy s8 charger",
                         "samsung galaxy s8 case",
                         "samsung galaxy s9 case",
@@ -108,7 +108,7 @@ public class EstimateServiceTest {
                         "samsung galaxy s8 screen protector",
                         "samsung galaxy s9 screen protector")
         );
-        when(autoCompleteClient.list("samsung n")).thenReturn(
+        when(autoCompleteClient.search("samsung n")).thenReturn(
                 Arrays.asList("samsung note 9 case",
                         "samsung note 8 case",
                         "samsung note 9 screen protector",
@@ -120,7 +120,7 @@ public class EstimateServiceTest {
                         "samsung note 5 case",
                         "samsung note 8 stylus replacement")
         );
-        when(autoCompleteClient.list("samsung note 7")).thenReturn(
+        when(autoCompleteClient.search("samsung note 7")).thenReturn(
                 Arrays.asList("samsung note 7",
                         "samsung note 7 unlocked",
                         "samsung note 7 charger",
@@ -133,7 +133,7 @@ public class EstimateServiceTest {
                         "samsung note 7 unlocked phone")
         );
 
-        when(autoCompleteClient.list("a")).thenReturn(
+        when(autoCompleteClient.search("a")).thenReturn(
                 Arrays.asList("aaa batteries",
                         "aa batteries",
                         "amazon gift cards",
@@ -145,7 +145,7 @@ public class EstimateServiceTest {
                         "apple watch charger",
                         "alarm clock")
         );
-        when(autoCompleteClient.list("as")).thenReturn(
+        when(autoCompleteClient.search("as")).thenReturn(
                 Arrays.asList("ashwagandha",
                         "ashwagandha capsules",
                         "astroglide",
@@ -157,7 +157,7 @@ public class EstimateServiceTest {
                         "astaxanthin",
                         "astrophysics for people in a hurry")
         );
-        when(autoCompleteClient.list("asd")).thenReturn(
+        when(autoCompleteClient.search("asd")).thenReturn(
                 Arrays.asList("asdm",
                         "asdm beverly hills",
                         "asdm beverly hills glycolic acid",
@@ -169,13 +169,13 @@ public class EstimateServiceTest {
                         "asdm beverly hills tepezcohuite cream",
                         "asd visual schedules")
         );
-        when(autoCompleteClient.list("asdl")).thenReturn(
+        when(autoCompleteClient.search("asdl")).thenReturn(
                 Arrays.asList("asdl modem router",
                         "asdl2 modem",
                         "asdl",
                         "asdl modem")
         );
-        when(autoCompleteClient.list("asdlk")).thenReturn(
+        when(autoCompleteClient.search("asdlk")).thenReturn(
                 Collections.emptyList()
         );
     }

@@ -15,7 +15,7 @@ public class AutoCompleteClient {
 
     private static final String AUTO_COMPLETE_API = "http://completion.amazon.com/search/complete";
 
-    public List<String> list(String keyword) throws IOException {
+    public List<String> search(String keyword) throws IOException {
 
         OkHttpClient okHttpClient = new OkHttpClient();
 

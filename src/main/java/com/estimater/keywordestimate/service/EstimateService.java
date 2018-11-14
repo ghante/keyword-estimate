@@ -22,32 +22,32 @@ public class EstimateService {
 
     public Estimate estimateFor(String keyword) throws IOException {
         int score = 100;
-
         String commonPrefix = "";
         String nextChar = nextChar(keyword, commonPrefix);
-        List<String> keywords = autoCompleteClient.list(commonPrefix + nextChar);
-        while (!keywords.contains(keyword)
+        List<String> results = autoCompleteClient.search(commonPrefix + nextChar);
+
+        while (!results.contains(keyword)
                 && !nextChar.isEmpty()
                 && score >= 0) {
-            keywords = autoCompleteClient.list(commonPrefix + nextChar);
-            commonPrefix = longestCommonPrefix(keywords);
+            results = autoCompleteClient.search(commonPrefix + nextChar);
+            commonPrefix = longestCommonPrefix(results);
             nextChar = nextChar(keyword, commonPrefix);
             score = score - 10;
         }
 
-        if (keywords.contains(keyword)) {
-            return new Estimate(score - keywords.indexOf(keyword));
+        if (results.contains(keyword)) {
+            return new Estimate(score - results.indexOf(keyword));
         }
 
-        if (containedIn(keyword, keywords)) {
+        if (containedIn(keyword, results)) {
             return new Estimate(score - 36);
         }
 
         return new Estimate(0);
     }
 
-    private boolean containedIn(String keyword, List<String> keywords) {
-        return longestCommonPrefix(keywords).trim().equals(keyword);
+    private boolean containedIn(String keyword, List<String> results) {
+        return longestCommonPrefix(results).trim().equals(keyword);
     }
 
     private String longestCommonPrefix(List<String> keywords) {
