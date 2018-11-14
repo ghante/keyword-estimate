@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.getCommonPrefix;
+import static org.apache.commons.lang3.StringUtils.substringAfter;
+
 @Service
 public class EstimateService {
     private AutoCompleteClient autoCompleteClient;
@@ -16,25 +19,43 @@ public class EstimateService {
         this.autoCompleteClient = autoCompleteClient;
     }
 
-    public Estimate estimateFor(Keyword keyword) throws IOException {
-        String keywordString = keyword.next("");
-        List<String> keywords = autoCompleteClient.list(keywordString);
+    public Estimate estimateFor(String keyword) throws IOException {
+        String searchString = nextChar(keyword, "");
+        List<String> keywords = autoCompleteClient.list(searchString);
         int score = 100;
-        while (!keyword.foundIn(keywords) && !keyword.sameAs(keywordString)) {
+        while (!keywords.contains(keyword) && !searchString.trim().equals(keyword) && score >= 0) {
+            keywords = autoCompleteClient.list(searchString);
+            String commonPrefix = longestCommonPrefix(keywords);
+            searchString = commonPrefix + nextChar(keyword, commonPrefix);
             score = score - 10;
-            keywordString = keyword.next(StringUtils.getCommonPrefix(keywords.toArray(new String[0])));
-            keywords = autoCompleteClient.list(keywordString);
         }
 
-        if (keywords.isEmpty()) {
-            return new Estimate(0);
+        if (keywords.contains(keyword)) {
+            return new Estimate(score - keywords.indexOf(keyword));
         }
 
-        if (keyword.foundIn(keywords)) {
-            return new Estimate(score - keyword.indexIn(keywords));
+        if (containedIn(keyword, keywords)) {
+            return new Estimate(score - 36);
         }
 
-        return new Estimate(score - 36);
+        keywords = autoCompleteClient.list(searchString);
+        if (keywords.contains(keyword)) {
+            return new Estimate((score - 10) - keywords.indexOf(keyword));
+        }
+
+        return new Estimate(0);
     }
 
+    private boolean containedIn(String keyword, List<String> keywords) {
+        return longestCommonPrefix(keywords).trim().equals(keyword);
+    }
+
+    private String longestCommonPrefix(List<String> keywords) {
+        return getCommonPrefix(keywords.toArray(new String[0]));
+    }
+
+    private String nextChar(String keyword, String commonPrefix) {
+        String remainingPart = substringAfter(keyword, commonPrefix);
+        return StringUtils.isBlank(remainingPart) ? "" : remainingPart.substring(0, 1);
+    }
 }

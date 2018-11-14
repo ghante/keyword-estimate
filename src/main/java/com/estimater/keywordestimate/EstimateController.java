@@ -19,6 +19,6 @@ public class EstimateController {
 
     @GetMapping("/estimate")
     public Estimate estimate(@RequestParam String keyword) throws IOException {
-        return estimateService.estimateFor(new Keyword(keyword));
+        return estimateService.estimateFor(keyword);
     }
 }

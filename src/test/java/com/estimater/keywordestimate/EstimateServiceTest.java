@@ -30,37 +30,43 @@ public class EstimateServiceTest {
 
     @Test
     public void shouldScore100() throws IOException {
-        Estimate estimate = estimateService.estimateFor(new Keyword("sd card"));
+        Estimate estimate = estimateService.estimateFor("sd card");
         assertThat(estimate.getScore(), is(100));
     }
 
     @Test
     public void shouldScore99() throws IOException {
-        Estimate estimate = estimateService.estimateFor(new Keyword("space heater"));
+        Estimate estimate = estimateService.estimateFor("space heater");
         assertThat(estimate.getScore(), is(99));
     }
 
     @Test
     public void shouldScore91() throws IOException {
-        Estimate estimate = estimateService.estimateFor(new Keyword("spray bottle"));
+        Estimate estimate = estimateService.estimateFor("spray bottle");
         assertThat(estimate.getScore(), is(91));
     }
 
     @Test
     public void shouldScore63() throws IOException {
-        Estimate estimate = estimateService.estimateFor(new Keyword("samsung note 9"));
-        assertThat(estimate.getScore(), is(63));
+        Estimate estimate = estimateService.estimateFor("samsung note 9");
+        assertThat(estimate.getScore(), is(53));
+    }
+
+    @Test
+    public void shouldScore50() throws IOException {
+        Estimate estimate = estimateService.estimateFor("samsung note 7");
+        assertThat(estimate.getScore(), is(50));
     }
 
     @Test
     public void shouldScore34() throws IOException {
-        Estimate estimate = estimateService.estimateFor(new Keyword("samsung"));
+        Estimate estimate = estimateService.estimateFor("samsung");
         assertThat(estimate.getScore(), is(34));
     }
 
     @Test
     public void shouldScore0() throws IOException {
-        Estimate estimate = estimateService.estimateFor(new Keyword("asdlk"));
+        Estimate estimate = estimateService.estimateFor("asdlk");
         assertThat(estimate.getScore(), is(0));
     }
 
@@ -101,18 +107,6 @@ public class EstimateServiceTest {
                         "samsung galaxy s8 screen protector",
                         "samsung galaxy s9 screen protector")
         );
-        when(autoCompleteClient.list("samsung")).thenReturn(
-                Arrays.asList("samsung note 9 case",
-                        "samsung note 8 case",
-                        "samsung note 9 screen protector",
-                        "samsung note 8 screen protector",
-                        "samsung note 9 charger",
-                        "samsung note 8 charger",
-                        "samsung note 4 battery",
-                        "samsung note 9",
-                        "samsung note 5 case",
-                        "samsung note 8 stylus replacement")
-        );
         when(autoCompleteClient.list("samsung n")).thenReturn(
                 Arrays.asList("samsung note 9 case",
                         "samsung note 8 case",
@@ -124,6 +118,18 @@ public class EstimateServiceTest {
                         "samsung note 9",
                         "samsung note 5 case",
                         "samsung note 8 stylus replacement")
+        );
+        when(autoCompleteClient.list("samsung note 7")).thenReturn(
+                Arrays.asList("samsung note 7",
+                        "samsung note 7 unlocked",
+                        "samsung note 7 charger",
+                        "samsung note 7 case",
+                        "samsung note 7 phone",
+                        "samsung note 7 battery",
+                        "samsung note 7 screen protector",
+                        "samsung note 7 fe",
+                        "samsung note 7charger",
+                        "samsung note 7 unlocked phone")
         );
 
         when(autoCompleteClient.list("a")).thenReturn(
