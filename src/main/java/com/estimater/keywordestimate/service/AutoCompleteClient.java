@@ -1,4 +1,4 @@
-package com.estimater.keywordestimate;
+package com.estimater.keywordestimate.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.HttpUrl;

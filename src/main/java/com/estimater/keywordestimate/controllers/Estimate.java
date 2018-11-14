@@ -1,4 +1,4 @@
-package com.estimater.keywordestimate;
+package com.estimater.keywordestimate.controllers;
 
 public class Estimate {
     private int score;

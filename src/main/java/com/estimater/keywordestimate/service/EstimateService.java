@@ -1,5 +1,6 @@
-package com.estimater.keywordestimate;
+package com.estimater.keywordestimate.service;
 
+import com.estimater.keywordestimate.controllers.Estimate;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

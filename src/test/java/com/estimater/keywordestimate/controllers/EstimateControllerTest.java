@@ -1,5 +1,8 @@
-package com.estimater.keywordestimate;
+package com.estimater.keywordestimate.controllers;
 
+import com.estimater.keywordestimate.controllers.Estimate;
+import com.estimater.keywordestimate.controllers.EstimateController;
+import com.estimater.keywordestimate.service.EstimateService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,8 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
