@@ -1,6 +1,5 @@
 package com.estimater.keywordestimate.service;
 
-import com.estimater.keywordestimate.service.AutoCompleteClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

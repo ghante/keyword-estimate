@@ -1,7 +1,5 @@
 package com.estimater.keywordestimate.controllers;
 
-import com.estimater.keywordestimate.controllers.Estimate;
-import com.estimater.keywordestimate.controllers.EstimateController;
 import com.estimater.keywordestimate.service.EstimateService;
 import org.junit.Before;
 import org.junit.Test;
