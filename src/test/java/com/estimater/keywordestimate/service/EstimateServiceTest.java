@@ -1,8 +1,6 @@
 package com.estimater.keywordestimate.service;
 
 import com.estimater.keywordestimate.controllers.Estimate;
-import com.estimater.keywordestimate.service.AutoCompleteClient;
-import com.estimater.keywordestimate.service.EstimateService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

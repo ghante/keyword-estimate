@@ -21,13 +21,17 @@ public class EstimateService {
     }
 
     public Estimate estimateFor(String keyword) throws IOException {
-        String searchString = nextChar(keyword, "");
-        List<String> keywords = autoCompleteClient.list(searchString);
         int score = 100;
-        while (!keywords.contains(keyword) && !searchString.trim().equals(keyword) && score >= 0) {
-            keywords = autoCompleteClient.list(searchString);
-            String commonPrefix = longestCommonPrefix(keywords);
-            searchString = commonPrefix + nextChar(keyword, commonPrefix);
+
+        String commonPrefix = "";
+        String nextChar = nextChar(keyword, commonPrefix);
+        List<String> keywords = autoCompleteClient.list(commonPrefix + nextChar);
+        while (!keywords.contains(keyword)
+                && !nextChar.isEmpty()
+                && score >= 0) {
+            keywords = autoCompleteClient.list(commonPrefix + nextChar);
+            commonPrefix = longestCommonPrefix(keywords);
+            nextChar = nextChar(keyword, commonPrefix);
             score = score - 10;
         }
 
@@ -37,11 +41,6 @@ public class EstimateService {
 
         if (containedIn(keyword, keywords)) {
             return new Estimate(score - 36);
-        }
-
-        keywords = autoCompleteClient.list(searchString);
-        if (keywords.contains(keyword)) {
-            return new Estimate((score - 10) - keywords.indexOf(keyword));
         }
 
         return new Estimate(0);
